@@ -9,7 +9,7 @@ Original file is located at
 
 from google.cloud import bigquery
 
-pip install --upgrade google-cloud-storage
+#pip install --upgrade google-cloud-storage
 
 def implicit():
     from google.cloud import storage
