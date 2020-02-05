@@ -30,7 +30,7 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
-    @app.route('/user/<name>')
+    @app.route('/user/<name>', methods=['GET'])
     def user_salt_score(name):
         name = name or request.values['user_name']
         # to query records which belong to a data model, write
