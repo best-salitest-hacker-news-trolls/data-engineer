@@ -44,4 +44,4 @@ def create_app(test_config=None):
 # password: v_OUkGHLr2HjMoxT_LWFhd5tYZh4jsxm
 # URL: postgres://bdnyvcca:v_OUkGHLr2HjMoxT_LWFhd5tYZh4jsxm@rajje.db.elephantsql.com:5432/bdnyvcca
 # API Key: 44c09cc1-ae32-4d58-bbac-26d33bbb2890
->>>>>>> cf5eda54ce7a2575d408c1fbc60ce0a034a6a350
+# >>>>>>> cf5eda54ce7a2575d408c1fbc60ce0a034a6a350
