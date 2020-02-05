@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from .models import DB, UserModel, CommentModel
+from sqlalchemy import desc
 import psycopg2
 import os
 
@@ -46,9 +47,15 @@ def create_app(test_config=None):
 
     @app.route('/leader_board')
     def leader_board():
+        # cut-off number to limit return
+        cutoff = 50
+        # column with which to rank
+        criteria = UserModel.Users_Salty_Score
         # return the top saltiest users in our database
-        people = UserModel
-        pass
+        # not sure how to fix this being too long for PEP8
+        people = UserModel.query.filter().limit(cutoff).all().order_by(desc(criteria))
+        people_dict = people.__dict__
+        return jsonify(people_dict)
 
     # elephantSQL Info
 # Server: rajje.db.elephantsql.com (rajje-01)
