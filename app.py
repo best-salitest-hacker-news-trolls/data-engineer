@@ -1,6 +1,6 @@
 
-from flask import Flask, request
-from .models import DB, UserModel, Comment
+from flask import Flask, request, jsonify
+from .models import DB, UserModel, CommentModel
 import psycopg2
 import os
 
@@ -9,6 +9,7 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
+        # this needs to be changed to PostGres or whatever we are using
         DATABASE=os.path.join(app.instance_path, 'buildweek3.sqlite3'),
     )
     if test_config is None:
@@ -30,9 +31,17 @@ def create_app(test_config=None):
         return 'Hello, World!'
 
     @app.route('/user/<name>')
-    def user_salt_score(name=None):
+    def user_salt_score(name):
         name = name or request.values['user_name']
-        return "To be Implemented "  # return the salt score corresponding to
+        # to query records which belong to a data model, write
+        # [MODEL].query.[method].[FIRST or ALL]
+        # https://hackersandslackers.com/flask-sqlalchemy-database-models
+        # https://hackersandslackers.com/database-queries-sqlalchemy-orm/
+        # this should return a
+        person = UserModel.query.filter(UserModel.username == name)
+        person_dict = person.__dict__
+        return jsonify(person_dict)
+
     @app.route('/leader_board')
     def leader_board():
         # return the top saltiest users in our database
