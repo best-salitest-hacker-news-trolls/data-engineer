@@ -1,8 +1,8 @@
-
 from flask import Flask, request, jsonify
 from .models import DB, UserModel, CommentModel
 import psycopg2
 import os
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -30,27 +30,31 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
+    # send individual user, returns all of their comments
+    # return
     @app.route('/user/<name>', methods=['GET'])
-    def user_salt_score(name):
+    def one_user_comments(name):
         name = name or request.values['user_name']
         # to query records which belong to a data model, write
         # [MODEL].query.[method].[FIRST or ALL]
         # https://hackersandslackers.com/flask-sqlalchemy-database-models
         # https://hackersandslackers.com/database-queries-sqlalchemy-orm/
         # this should return a
-        person = UserModel.query.filter(UserModel.username == name)
+        person = CommentModel.query.filter(CommentModel.username == name).all()
         person_dict = person.__dict__
         return jsonify(person_dict)
 
     @app.route('/leader_board')
     def leader_board():
         # return the top saltiest users in our database
+        people = UserModel
         pass
 
     # elephantSQL Info
 # Server: rajje.db.elephantsql.com (rajje-01)
 # user: bdnyvcca 
 # password: v_OUkGHLr2HjMoxT_LWFhd5tYZh4jsxm
-# URL: postgres://bdnyvcca:v_OUkGHLr2HjMoxT_LWFhd5tYZh4jsxm@rajje.db.elephantsql.com:5432/bdnyvcca
+# URL: postgres://bdnyvcca:v_OUkGHLr2HjMoxT_LWFhd5tYZh4jsxm@rajje.db
+# .elephantsql.com:5432/bdnyvcca
 # API Key: 44c09cc1-ae32-4d58-bbac-26d33bbb2890
 # >>>>>>> cf5eda54ce7a2575d408c1fbc60ce0a034a6a350
