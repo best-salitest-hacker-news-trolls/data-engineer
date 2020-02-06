@@ -47,6 +47,8 @@ def create_app(test_config=None):
         person_dict = person.__dict__
         return jsonify(person_dict)
 
+    # does not take any arguments and returns the leaderboard
+    # change how many are returned with cutoff variable
     @app.route('/leader_board')
     def user_leader_board():
         # cut-off number to limit return
@@ -64,10 +66,16 @@ def create_app(test_config=None):
         people_dict = people.__dict__
         return jsonify(people_dict)
 
+    # returns all of a users' comments 
     @app.route('/user/<name>/comments')
     def user_comment_ranks(name):
-
-        return "Error"
+        # number of items to return
+        cutoff = 10
+        # query filter
+        criteria = UserModel.Users_Salty_Score
+        comments = UserModel.query(filter(UserModel.username == name)).limit(cutoff).all().order_by(desc(criteria))
+        comments_dict = comments.__dict__
+        return jsonify(comments_dict)
     return app
 
 # elephantSQL Info
