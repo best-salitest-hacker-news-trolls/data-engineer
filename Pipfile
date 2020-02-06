@@ -10,6 +10,8 @@ flask = "*"
 request = "*"
 gunicorn = "*"
 psycopg2 = "*"
+flask-sqlalchemy = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"
