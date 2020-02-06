@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
-from .models import DB, UserModel, CommentModel
+from models import DB, UserModel, CommentModel
 from sqlalchemy import desc
-import psycopg2
+# import psycopg2
 import os
 
 
