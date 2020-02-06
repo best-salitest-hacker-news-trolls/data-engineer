@@ -17,7 +17,7 @@ class CommentModel(DB.Model):
     __tablename__ = 'comments'
     id = DB.Column(DB.BigInteger, primary_key=True)
     text = DB.Column(DB.Unicode(500), nullable=False)
-    username = DB.Column(DB.BigInteger, ForeignKey('users.username'))
+    username = DB.Column(DB.BigInteger, DB.ForeignKey('users.username'))
 
     def __repr__(self):
         return '<CommentModel {}>'.format(self.username)

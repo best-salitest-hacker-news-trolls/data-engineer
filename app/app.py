@@ -8,6 +8,8 @@ import os
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+    DB.init_app(app)
     app.config.from_mapping(
         SECRET_KEY='dev',
         # this needs to be changed to PostGres or whatever we are using
@@ -29,7 +31,7 @@ def create_app(test_config=None):
     # a simple page that says hello to make sure it works
     @app.route('/hello')
     def hello():
-        return 'Hello, World!'
+        return 'Hello . . .  World!'
 
     # send individual user, returns all of their comments
     # return
