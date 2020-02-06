@@ -46,18 +46,29 @@ def create_app(test_config=None):
         return jsonify(person_dict)
 
     @app.route('/leader_board')
-    def leader_board():
+    def user_leader_board():
         # cut-off number to limit return
+        # https://stackoverflow.com/questions/20642497/sqlalchemy-query-to
+        # -return-only-n-results
         cutoff = 50
         # column with which to rank
+        # https://stackoverflow.com/questions/4186062/sqlalchemy-order-by
+        # -descending
         criteria = UserModel.Users_Salty_Score
         # return the top saltiest users in our database
         # not sure how to fix this being too long for PEP8
-        people = UserModel.query.filter().limit(cutoff).all().order_by(desc(criteria))
+        people = UserModel.query.filter().limit(cutoff).all().order_by(
+            desc(criteria))
         people_dict = people.__dict__
         return jsonify(people_dict)
 
-    # elephantSQL Info
+    @app.route('/user/<name>/comments')
+    def user_comment_ranks(name):
+
+        return "Error"
+    return app
+
+# elephantSQL Info
 # Server: rajje.db.elephantsql.com (rajje-01)
 # user: bdnyvcca 
 # password: v_OUkGHLr2HjMoxT_LWFhd5tYZh4jsxm
